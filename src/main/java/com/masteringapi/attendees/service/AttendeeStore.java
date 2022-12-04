@@ -46,4 +46,10 @@ public class AttendeeStore {
         }
     }
 
+    public int addAttendee(Attendee attendee) {
+        attendee.setId(this.attendees.size() + 1);
+        this.attendees.add(attendee);
+        return this.attendees.size();
+    }
+
 }
