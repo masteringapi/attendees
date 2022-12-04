@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 @GrpcService
 public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceImplBase {
 
-    @Autowired
     private AttendeeStore store;
+
+    public AttendeesServiceImpl(@Autowired AttendeeStore store) {
+        this.store = store;
+    }
 
     @Override
     public void getAttendees(AttendeesRequest request, StreamObserver<AttendeeResponse> responseObserver) {

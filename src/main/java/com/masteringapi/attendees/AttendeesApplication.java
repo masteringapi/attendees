@@ -17,6 +17,10 @@ public class AttendeesApplication {
 		SpringApplication.run(AttendeesApplication.class, args);
 	}
 
+	/**
+	 * This bean is required configuration to filter out some of the health endpoints that Spring provides
+	 * @return Configuration to remove custom Spring Boot additions
+	 */
 	@Bean
 	public Docket api() {
 		ApiInfo apiInfo = new ApiInfoBuilder()
