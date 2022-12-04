@@ -1,0 +1,22 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.masteringapi.attendees.grpc.server;
+
+message AttendeesRequest {
+}
+
+message Attendee {
+  int32 id = 1;
+  string givenName = 2;
+  string surname = 3;
+  string email = 4;
+
+}
+
+message AttendeeResponse {
+  repeated Attendee attendees = 1;
+}
+
+service AttendeesService {
+  rpc getAttendees(AttendeesRequest) returns (AttendeeResponse) {}
+}
