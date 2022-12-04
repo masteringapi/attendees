@@ -41,3 +41,8 @@ Using [gRPC UI](https://github.com/fullstorydev/grpcui) you can use the reflecti
 grpcui -plaintext localhost:9090
 ```
 
+## Next steps
+
+Please see the current issues for more detail. 
+Over the next few days we will be adding information on how to deploy attendees to Kubernetes and Istio. 
+We will also add full details of how use argo to rollout the project. 
