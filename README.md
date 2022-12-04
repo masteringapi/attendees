@@ -19,12 +19,13 @@ Using Apache Maven you can build the project or run the docker image (detail bel
 ### Building using Docker
 
 The [Dockerfile](/Dockerfile) contains a multistage build, this will both compile the java code and create an image.
-You can simply run `docker build -t <your-org>/attendees .`
+You can simply run `docker build -t <your-org>/attendees .`   
 Once the build has completed run using `docker run -p 8080:8080 -p 9090:9090 <your-org>/attendees`
 
 ### Running using DockerHub
 
-You can run the latest example directly from our [DockerHub](https://hub.docker.com/r/masteringapi/attendees) using `docker run -p 8080:8080 -p 9090:9090 masteringapi/attendees`.
+You can run the latest example directly from our [DockerHub](https://hub.docker.com/r/masteringapi/attendees) using:    
+`docker run -p 8080:8080 -p 9090:9090 masteringapi/attendees`.
 
 ## Querying the Attendees Service
 
@@ -38,7 +39,7 @@ Clicking Try It Out will hit the endpoint.
 Using [gRPC UI](https://github.com/fullstorydev/grpcui) you can use the reflection service and invoke endpoints:
 
 ```bash
-grpcui -plaintext localhost:9090
+grpcui --plaintext localhost:9090
 ```
 
 ## Next steps
