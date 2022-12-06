@@ -59,4 +59,21 @@ public class TestAttendeeStoreShould {
         this.attendeeStore.removeAttendee(3);
         assertThat(this.attendeeStore.getAttendees().size(), equalTo(2));
     }
+
+    @Test
+    void update_an_attendee_throws_when_out_of_bounds() {
+        assertThrows(AttendeeNotFoundException.class, () -> this.attendeeStore.updateAttendee(5, null));
+    }
+
+    @Test
+    void update_an_attendee_with_new_values() throws AttendeeNotFoundException {
+        Attendee attendee = new Attendee();
+        attendee.setId(10);
+        attendee.setEmail("test@mail.com");
+        attendee.setGivenName("Test");
+        attendee.setSurname("User");
+        this.attendeeStore.updateAttendee(1, attendee);
+        assertThat(1, equalTo(this.attendeeStore.getAttendee(1).getId()));
+        assertThat("test@mail.com", equalTo(this.attendeeStore.getAttendee(1).getEmail()));
+    }
 }

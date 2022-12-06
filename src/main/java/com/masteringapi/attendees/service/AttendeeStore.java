@@ -61,4 +61,13 @@ public class AttendeeStore {
             throw new AttendeeNotFoundException();
         }
     }
+
+    public void updateAttendee(Integer id, Attendee attendee) throws AttendeeNotFoundException {
+        if(this.attendees.containsKey(id)) {
+            attendee.setId(id);
+            this.attendees.put(id, attendee);
+        } else {
+            throw new AttendeeNotFoundException();
+        }
+    }
 }
