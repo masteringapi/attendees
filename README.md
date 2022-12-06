@@ -1,5 +1,7 @@
 # Mastering API Architecture Attendees 
 
+GitHub: https://github.com/masteringapi/attendees
+
 Welcome to the primary repository accompanyting the book [Mastering API Architecture](https://www.oreilly.com/library/view/mastering-api-architecture/9781492090625/).
 We welcome all feedback as you are working through the book, if you would like to see anything additional please raise an issue.
 

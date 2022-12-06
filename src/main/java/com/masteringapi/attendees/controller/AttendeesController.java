@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.ArrayList;
 
 @RestController
 public class AttendeesController {
@@ -24,7 +25,7 @@ public class AttendeesController {
     @ResponseBody
     @ApiOperation(value = "Retrieve a list of all attendees", nickname = "Get Attendees")
     public AttendeeResponse getAttendees() {
-        return new AttendeeResponse(store.getAttendees());
+        return new AttendeeResponse(new ArrayList<>(store.getAttendees()));
     }
 
     @GetMapping("/attendees/{id}")
@@ -45,6 +46,18 @@ public class AttendeesController {
         int id = this.store.addAttendee(attendee);
         URI uri = URI.create("/attendees/" + id);
         return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping("/attendees/{id}")
+    @ResponseBody
+    @ApiOperation(value = "Retrieve a specific attendee", nickname = "Get Attendee")
+    public ResponseEntity<Attendee> deleteAttendee(@PathVariable(value = "id") Integer id) {
+        try {
+            this.store.removeAttendee(id);
+            return ResponseEntity.ok().build();
+        } catch(AttendeeNotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
