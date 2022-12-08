@@ -17,6 +17,15 @@ message AttendeeResponse {
   repeated Attendee attendees = 1;
 }
 
+message CreateAttendeeRequest {
+  Attendee attendee = 1;
+}
+
+message CreateAttendeeResponse {
+  Attendee attendee = 1;
+}
+
 service AttendeesService {
   rpc getAttendees(AttendeesRequest) returns (AttendeeResponse) {}
+  rpc createAttendee(CreateAttendeeRequest) returns (CreateAttendeeResponse) {}
 }

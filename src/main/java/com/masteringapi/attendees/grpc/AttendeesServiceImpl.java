@@ -1,12 +1,9 @@
 package com.masteringapi.attendees.grpc;
 
-import com.masteringapi.attendees.grpc.server.AttendeeResponse;
-import com.masteringapi.attendees.grpc.server.AttendeesRequest;
-import com.masteringapi.attendees.grpc.server.AttendeesServiceGrpc;
+import com.masteringapi.attendees.grpc.server.*;
 import com.masteringapi.attendees.service.AttendeeStore;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
-import com.masteringapi.attendees.grpc.server.Attendee;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @GrpcService
@@ -32,6 +29,20 @@ public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceI
             responseBuilder.addAttendees(grpcAttendee);
         }
 
+        responseObserver.onNext(responseBuilder.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void createAttendee(CreateAttendeeRequest request, StreamObserver<CreateAttendeeResponse> responseObserver) {
+        CreateAttendeeResponse.Builder responseBuilder = CreateAttendeeResponse.newBuilder();
+
+        int id = this.store.addAttendee(new com.masteringapi.attendees.model.Attendee(request.getAttendee()));
+
+        Attendee attendee = Attendee.newBuilder().mergeFrom(request.getAttendee())
+                .setId(id)
+                .build();
+        responseBuilder.setAttendee(attendee);
         responseObserver.onNext(responseBuilder.build());
         responseObserver.onCompleted();
     }
