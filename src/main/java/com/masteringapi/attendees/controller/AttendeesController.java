@@ -50,7 +50,7 @@ public class AttendeesController {
 
     @DeleteMapping("/attendees/{id}")
     @ResponseBody
-    @ApiOperation(value = "Retrieve a specific attendee", nickname = "Get Attendee")
+    @ApiOperation(value = "Delete a specific attendee", nickname = "Delete Attendee")
     public ResponseEntity<Attendee> deleteAttendee(@PathVariable(value = "id") Integer id) {
         try {
             this.store.removeAttendee(id);
@@ -59,5 +59,18 @@ public class AttendeesController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("attendees/{id}")
+    @ResponseBody
+    @ApiOperation(value = "Update a specific attendee", nickname = "Update Attendee")
+    public ResponseEntity<Attendee> updateAttendee(@PathVariable(value = "id") Integer id, @RequestBody Attendee attendee) {
+        try {
+            this.store.updateAttendee(id, attendee);
+            return ResponseEntity.noContent().build();
+        } catch(AttendeeNotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
