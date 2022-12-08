@@ -3,7 +3,7 @@ name: Java CI
 on:
   pull_request:
     types:
-      - opened
+      - [opened, reopened]
 
 jobs:
   build:
