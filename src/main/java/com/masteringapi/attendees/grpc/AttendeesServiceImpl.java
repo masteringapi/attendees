@@ -2,6 +2,7 @@ package com.masteringapi.attendees.grpc;
 
 import com.masteringapi.attendees.grpc.server.*;
 import com.masteringapi.attendees.model.AttendeeNotFoundException;
+import com.masteringapi.attendees.model.AttendeeResponse;
 import com.masteringapi.attendees.service.AttendeeStore;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -66,10 +67,41 @@ public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceI
                     .build();
             responseBuilder.setAttendee(grpcAttendee);
             responseObserver.onNext(responseBuilder.build());
+            responseObserver.onCompleted();
         } catch (AttendeeNotFoundException e) {
             responseObserver.onError(e);
             logger.error("Could not find attendee", e);
         }
-        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void deleteAttendee(DeleteAttendeeRequest request, StreamObserver<DeleteAttendeeResponse> responseObserver) {
+        DeleteAttendeeResponse.Builder responseBuilder = DeleteAttendeeResponse.newBuilder();
+
+        try {
+            this.store.removeAttendee(request.getId());
+            responseObserver.onNext(responseBuilder.build());
+            responseObserver.onCompleted();
+        } catch (AttendeeNotFoundException e) {
+            responseObserver.onError(e);
+            logger.error("Could not find attendee to delete", e);
+        }
+    }
+
+    @Override
+    public void updateAttendee(UpdateAttendeeRequest request, StreamObserver<UpdateAttendeeResponse> responseObserver) {
+        UpdateAttendeeResponse.Builder responseBuilder = UpdateAttendeeResponse.newBuilder();
+
+        try {
+            this.store.updateAttendee(request.getAttendee().getId(),
+                    new com.masteringapi.attendees.model.Attendee(request.getAttendee()));
+
+            responseBuilder.setAttendee(request.getAttendee());
+            responseObserver.onNext(responseBuilder.build());
+            responseObserver.onCompleted();
+        } catch (AttendeeNotFoundException e) {
+            responseObserver.onError(e);
+            logger.error("Unable to update attendee", e);
+        }
     }
 }

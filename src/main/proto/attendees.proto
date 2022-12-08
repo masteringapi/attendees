@@ -32,8 +32,26 @@ message GetAttendeeResponse {
   Attendee attendee = 1;
 }
 
+message DeleteAttendeeRequest {
+  int32 id = 1;
+}
+
+message DeleteAttendeeResponse {
+
+}
+
+message UpdateAttendeeRequest {
+  Attendee attendee = 1;
+}
+
+message UpdateAttendeeResponse {
+  Attendee attendee = 1;
+}
+
 service AttendeesService {
   rpc getAttendees(GetAttendeesRequest) returns (GetAttendeesResponse) {}
   rpc createAttendee(CreateAttendeeRequest) returns (CreateAttendeeResponse) {}
   rpc getAttendee(GetAttendeeRequest) returns (GetAttendeeResponse) {}
+  rpc deleteAttendee(DeleteAttendeeRequest) returns (DeleteAttendeeResponse) {}
+  rpc updateAttendee(UpdateAttendeeRequest) returns (UpdateAttendeeResponse) {}
 }
