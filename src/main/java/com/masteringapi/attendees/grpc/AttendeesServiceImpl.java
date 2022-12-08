@@ -46,4 +46,6 @@ public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceI
         responseObserver.onNext(responseBuilder.build());
         responseObserver.onCompleted();
     }
+
+
 }
