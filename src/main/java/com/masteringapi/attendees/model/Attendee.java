@@ -10,6 +10,16 @@ import java.util.regex.Pattern;
 public class Attendee {
     private Integer id;
 
+    public Attendee() {
+
+    }
+
+    public Attendee(com.masteringapi.attendees.grpc.server.Attendee attendee) {
+        this.surname = attendee.getSurname();
+        this.givenName = attendee.getGivenName();
+        this.email = attendee.getEmail();
+    }
+
     @NotNull
     @Size(max=35)
     private String givenName;

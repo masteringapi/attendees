@@ -2,7 +2,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 package com.masteringapi.attendees.grpc.server;
 
-message AttendeesRequest {
+message GetAttendeesRequest {
 }
 
 message Attendee {
@@ -13,10 +13,45 @@ message Attendee {
 
 }
 
-message AttendeeResponse {
+message GetAttendeesResponse {
   repeated Attendee attendees = 1;
 }
 
+message CreateAttendeeRequest {
+  Attendee attendee = 1;
+}
+
+message CreateAttendeeResponse {
+  Attendee attendee = 1;
+}
+
+message GetAttendeeRequest {
+  int32 id = 1;
+}
+message GetAttendeeResponse {
+  Attendee attendee = 1;
+}
+
+message DeleteAttendeeRequest {
+  int32 id = 1;
+}
+
+message DeleteAttendeeResponse {
+
+}
+
+message UpdateAttendeeRequest {
+  Attendee attendee = 1;
+}
+
+message UpdateAttendeeResponse {
+  Attendee attendee = 1;
+}
+
 service AttendeesService {
-  rpc getAttendees(AttendeesRequest) returns (AttendeeResponse) {}
+  rpc getAttendees(GetAttendeesRequest) returns (GetAttendeesResponse) {}
+  rpc createAttendee(CreateAttendeeRequest) returns (CreateAttendeeResponse) {}
+  rpc getAttendee(GetAttendeeRequest) returns (GetAttendeeResponse) {}
+  rpc deleteAttendee(DeleteAttendeeRequest) returns (DeleteAttendeeResponse) {}
+  rpc updateAttendee(UpdateAttendeeRequest) returns (UpdateAttendeeResponse) {}
 }
