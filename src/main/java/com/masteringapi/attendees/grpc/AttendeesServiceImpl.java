@@ -16,8 +16,8 @@ public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceI
     }
 
     @Override
-    public void getAttendees(AttendeesRequest request, StreamObserver<AttendeeResponse> responseObserver) {
-        AttendeeResponse.Builder responseBuilder = com.masteringapi.attendees.grpc.server.AttendeeResponse.newBuilder();
+    public void getAttendees(GetAttendeesRequest request, StreamObserver<GetAttendeesResponse> responseObserver) {
+        GetAttendeesResponse.Builder responseBuilder = com.masteringapi.attendees.grpc.server.GetAttendeesResponse.newBuilder();
 
         for(com.masteringapi.attendees.model.Attendee attendee: store.getAttendees()) {
             Attendee grpcAttendee = Attendee.newBuilder()
