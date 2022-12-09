@@ -1,8 +1,8 @@
 name: Java CI
 
 on:
-  pull_request:
-    types: [opened, reopened, edited]
+  - pull_request
+  - push
 
 jobs:
   build:
