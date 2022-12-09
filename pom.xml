@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.4.RELEASE</version>
+		<version>3.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.masteringapi</groupId>
@@ -15,7 +15,7 @@
 	<description>Attendees Service for Mastering API</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>net.devh</groupId>
 			<artifactId>grpc-server-spring-boot-starter</artifactId>
-			<version>2.10.1.RELEASE</version>
+			<version>2.14.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -66,7 +66,11 @@
 			<artifactId>jakarta.validation-api</artifactId>
 			<version>2.0.2</version>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -88,11 +92,11 @@
 				<version>0.6.1</version>
 				<configuration>
 					<protocArtifact>
-						com.google.protobuf:protoc:3.3.0:exe:${os.detected.classifier}
+						com.google.protobuf:protoc:3.12.0:exe:${os.detected.classifier}
 					</protocArtifact>
 					<pluginId>grpc-java</pluginId>
 					<pluginArtifact>
-						io.grpc:protoc-gen-grpc-java:1.4.0:exe:${os.detected.classifier}
+						io.grpc:protoc-gen-grpc-java:1.36.0:exe:${os.detected.classifier}
 					</pluginArtifact>
 				</configuration>
 				<executions>
