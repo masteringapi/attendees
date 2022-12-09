@@ -1,11 +1,8 @@
 package com.masteringapi.attendees.model;
 
-import javax.annotation.RegEx;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class Attendee {
     private Integer id;

@@ -26,14 +26,14 @@ Once the build has completed run using `docker run -p 8080:8080 -p 9090:9090 <yo
 
 ### Running using DockerHub
 
-You can run the latest example directly from our [DockerHub](https://hub.docker.com/r/masteringapi/attendees) using:    
+You can run the latest example directly from our [DockerHub](https://hub.docker.com/r/masteringapi/attendees) using:      
 `docker run -p 8080:8080 -p 9090:9090 masteringapi/attendees`.
 
 ## Querying the Attendees Service
 
 ### REST
 
-You can find the OpenAPI Specification documented on the live instance: http://localhost:8080/swagger-ui/index.html#/.
+You can find the OpenAPI Specification documented on the live instance: http://localhost:8080/swagger-ui.html.   
 Clicking Try It Out will hit the endpoint.
 
 ### gRPC
