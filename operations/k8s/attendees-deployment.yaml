@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attendees-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: attendees-api
+  template:
+    metadata:
+      labels:
+        app: attendees-api
+    spec:
+      containers:
+        - name: attendees
+          image: masteringapi/attendees
+          ports:
+            - containerPort: 8080
+            - containerPort: 9090
