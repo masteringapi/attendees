@@ -1,0 +1,38 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: attendees-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: attendees
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - attendees-gateway
+  http:
+    - fault:
+        delay:
+          fixedDelay: 7s
+          percentage:
+            value: 100
+      match:
+        - uri:
+            prefix: /attendees
+      route:
+        - destination:
+            port:
+              number: 80
+            host: attendees-http
