@@ -43,7 +43,7 @@ public class TestAttendeesServiceImplShould {
     }
 
     @Test
-    void attendee_returned_when_in_store() {
+    void return_attendee_when_in_store() {
         List<Attendee> attendees = new ArrayList<>();
         attendees.add(testAttendee());
         GetAttendeesRequest request = GetAttendeesRequest.newBuilder().build();
@@ -59,7 +59,7 @@ public class TestAttendeesServiceImplShould {
     }
 
     @Test
-    void attendee_does_not_exist_throws_error() throws AttendeeNotFoundException {
+    void throw_an_error_when_attendee_does_not_exist() throws AttendeeNotFoundException {
         GetAttendeeRequest request = GetAttendeeRequest.newBuilder().setId(1).build();
         when(store.getAttendee(anyInt())).thenThrow(new AttendeeNotFoundException());
         StreamRecorder<GetAttendeeResponse> responseObserver = StreamRecorder.create();

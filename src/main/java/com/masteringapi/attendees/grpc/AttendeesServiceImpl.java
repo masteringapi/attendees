@@ -2,7 +2,6 @@ package com.masteringapi.attendees.grpc;
 
 import com.masteringapi.attendees.grpc.server.*;
 import com.masteringapi.attendees.model.AttendeeNotFoundException;
-import com.masteringapi.attendees.model.AttendeeResponse;
 import com.masteringapi.attendees.service.AttendeeStore;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
