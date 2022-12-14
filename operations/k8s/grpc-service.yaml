@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: attendees-grpc
 spec:
+  type: LoadBalancer
   selector:
     app: attendees-api
   ports:

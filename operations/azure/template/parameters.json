@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "value": "mastering-api"
+        },
+        "location": {
+            "value": "uksouth"
+        },
+        "dnsPrefix": {
+            "value": "mastering-api-dns"
+        },
+        "kubernetesVersion": {
+            "value": "1.24.6"
+        },
+        "networkPlugin": {
+            "value": "kubenet"
+        },
+        "enableRBAC": {
+            "value": true
+        },
+        "enablePrivateCluster": {
+            "value": false
+        },
+        "enableHttpApplicationRouting": {
+            "value": false
+        },
+        "enableAzurePolicy": {
+            "value": false
+        },
+        "enableSecretStoreCSIDriver": {
+            "value": false
+        },
+        "vmssNodePool": {
+            "value": true
+        },
+        "networkPolicy": {
+            "value": "calico"
+        }
+    }
+}
