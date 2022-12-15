@@ -1,9 +1,11 @@
 package com.masteringapi.attendees.grpc;
 
+import com.google.rpc.Code;
+import com.google.rpc.Status;
 import com.masteringapi.attendees.grpc.server.*;
 import com.masteringapi.attendees.model.AttendeeNotFoundException;
-import com.masteringapi.attendees.model.AttendeeResponse;
 import com.masteringapi.attendees.service.AttendeeStore;
+import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.slf4j.Logger;
@@ -13,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @GrpcService
 public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceImplBase {
 
-    private Logger logger = LoggerFactory.getLogger(AttendeesServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(AttendeesServiceImpl.class);
 
-    private AttendeeStore store;
+    private final AttendeeStore store;
 
     public AttendeesServiceImpl(@Autowired AttendeeStore store) {
         this.store = store;
@@ -69,7 +71,10 @@ public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceI
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
         } catch (AttendeeNotFoundException e) {
-            responseObserver.onError(e);
+            Status status = Status.newBuilder().setCode(Code.NOT_FOUND.getNumber())
+                            .setMessage("Attendee Not Found")
+                                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
             logger.error("Could not find attendee", e);
         }
     }
@@ -83,7 +88,10 @@ public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceI
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
         } catch (AttendeeNotFoundException e) {
-            responseObserver.onError(e);
+            Status status = Status.newBuilder().setCode(Code.NOT_FOUND.getNumber())
+                    .setMessage("Attendee Not Found")
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
             logger.error("Could not find attendee to delete", e);
         }
     }
@@ -100,7 +108,10 @@ public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceI
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
         } catch (AttendeeNotFoundException e) {
-            responseObserver.onError(e);
+            Status status = Status.newBuilder().setCode(Code.NOT_FOUND.getNumber())
+                    .setMessage("Attendee Not Found")
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
             logger.error("Unable to update attendee", e);
         }
     }
