@@ -66,10 +66,11 @@ public class TestAttendeesServiceImplShould {
 
         this.attendeesService.getAttendee(request, responseObserver);
         assertThat(responseObserver.getError(), is(notNullValue()));
+        assertThat(responseObserver.getError().getMessage(), is("NOT_FOUND: Attendee Not Found"));
     }
 
     @Test
-    void attendee_returned_for_a_give_id() throws AttendeeNotFoundException {
+    void return_attendee_for_given_id() throws AttendeeNotFoundException {
         GetAttendeeRequest request = GetAttendeeRequest.newBuilder().setId(1).build();
         when(store.getAttendee(anyInt())).thenReturn(testAttendee());
         StreamRecorder<GetAttendeeResponse> responseObserver = StreamRecorder.create();
@@ -82,7 +83,7 @@ public class TestAttendeesServiceImplShould {
     }
 
     @Test
-    void creates_an_attendee() {
+    void create_an_attendee() {
         CreateAttendeeRequest createAttendeeRequest = CreateAttendeeRequest.newBuilder()
                 .setAttendee(testGrpcAttendee()).build();
         StreamRecorder<CreateAttendeeResponse> responseObserver = StreamRecorder.create();
@@ -102,6 +103,7 @@ public class TestAttendeesServiceImplShould {
 
         this.attendeesService.deleteAttendee(deleteAttendeeRequest, responseObserver);
         assertThat(responseObserver.getError(), is(notNullValue()));
+        assertThat(responseObserver.getError().getMessage(), is("NOT_FOUND: Attendee Not Found"));
     }
 
     @Test
@@ -122,13 +124,17 @@ public class TestAttendeesServiceImplShould {
 
         this.attendeesService.updateAttendee(updateAttendeeRequest, responseObserver);
         assertThat(responseObserver.getError(), is(notNullValue()));
+        assertThat(responseObserver.getError().getMessage(), is("NOT_FOUND: Attendee Not Found"));
     }
 
     @Test
-    void updates_a_given_attendee() throws AttendeeNotFoundException {
+    void update_a_given_attendee() throws AttendeeNotFoundException {
         UpdateAttendeeRequest updateAttendeeRequest = UpdateAttendeeRequest.newBuilder().setAttendee(testGrpcAttendee()).build();
         StreamRecorder<UpdateAttendeeResponse> responseObserver = StreamRecorder.create();
 
+        this.attendeesService.updateAttendee(updateAttendeeRequest, responseObserver);
+        assertThat(responseObserver.getError(), equalTo(null));
+        verify(store).updateAttendee(ArgumentMatchers.isA(Integer.class), ArgumentMatchers.isA(Attendee.class));
     }
 
     private com.masteringapi.attendees.grpc.server.Attendee testGrpcAttendee() {
