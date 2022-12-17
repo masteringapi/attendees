@@ -15,6 +15,7 @@ public class Attendee {
         this.surname = attendee.getSurname();
         this.givenName = attendee.getGivenName();
         this.email = attendee.getEmail();
+        this.speaker = attendee.getSpeaker();
     }
 
     @NotNull
@@ -28,6 +29,8 @@ public class Attendee {
     @NotNull
     @Size(max=254)
     private String email;
+
+    private boolean speaker;
 
     public Integer getId() {
         return id;
@@ -72,5 +75,13 @@ public class Attendee {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public boolean isSpeaker() {
+        return speaker;
+    }
+
+    public void setSpeaker(boolean speaker) {
+        this.speaker = speaker;
     }
 }

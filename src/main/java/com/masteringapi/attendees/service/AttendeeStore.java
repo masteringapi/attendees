@@ -20,18 +20,21 @@ public class AttendeeStore {
         attendee.setGivenName("Jim");
         attendee.setSurname("Gough");
         attendee.setEmail("gough@mail.com");
+        attendee.setSpeaker(false);
         this.attendees.put(1, attendee);
         attendee = new Attendee();
         attendee.setId(counter.incrementAndGet());
         attendee.setGivenName("Matt");
         attendee.setSurname("Auburn");
         attendee.setEmail("auburn@mail.com");
+        attendee.setSpeaker(true);
         this.attendees.put(2, attendee);
         attendee = new Attendee();
         attendee.setId(counter.incrementAndGet());
         attendee.setGivenName("Daniel");
         attendee.setSurname("Bryant");
         attendee.setEmail("bryant@mail.com");
+        attendee.setSpeaker(true);
         this.attendees.put(3, attendee);
     }
 

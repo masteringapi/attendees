@@ -33,6 +33,7 @@ public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceI
                     .setGivenName(attendee.getGivenName())
                     .setSurname(attendee.getSurname())
                     .setEmail(attendee.getEmail())
+                    .setSpeaker(attendee.isSpeaker())
                     .build();
             responseBuilder.addAttendees(grpcAttendee);
         }
@@ -60,12 +61,13 @@ public class AttendeesServiceImpl extends AttendeesServiceGrpc.AttendeesServiceI
         GetAttendeeResponse.Builder responseBuilder = GetAttendeeResponse.newBuilder();
 
         try {
-            com.masteringapi.attendees.model.Attendee attendee = this.store.getAttendee(request.getId());
+            var attendee = this.store.getAttendee(request.getId());
             Attendee grpcAttendee = Attendee.newBuilder()
                     .setId(attendee.getId())
                     .setGivenName(attendee.getGivenName())
                     .setSurname(attendee.getSurname())
                     .setEmail(attendee.getEmail())
+                    .setSpeaker(attendee.isSpeaker())
                     .build();
             responseBuilder.setAttendee(grpcAttendee);
             responseObserver.onNext(responseBuilder.build());
